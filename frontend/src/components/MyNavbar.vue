@@ -84,6 +84,7 @@ export default {
 .forb {
   color: white;
   font-size: 30px;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .transparent {
