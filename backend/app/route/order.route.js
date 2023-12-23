@@ -7,8 +7,10 @@ module.exports = (app) => {
 
     app.post("/api/inviteAndCreateOrder", [authJwt.verifyToken], order.inviteAndCreateOrder);
 
-    app.get("/api/getOrdersByUserId",  [authJwt.verifyToken], order.getOrdersByUserId);
+    app.get("/api/getOrdersByUserId/:user_id",  [authJwt.verifyToken], order.getOrdersByUserId);
 
-    app.get("/api/rejectOrder",  [authJwt.verifyToken], order.rejectOrder);
+    app.get("/api/rejectOrder/:orderId",  [authJwt.verifyToken], order.rejectOrder);
 
+    app.get("/api/getStartEndDate",  [authJwt.verifyToken], order.getStartEndDate);
+    
 };

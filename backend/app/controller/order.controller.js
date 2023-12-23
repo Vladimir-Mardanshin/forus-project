@@ -98,3 +98,20 @@ exports.rejectOrder = async (req, res) => {
     }
 };  
   
+
+//Запрос содержит данные о времени заявок
+//Это позволит на фронтенде блокировать занятые временные интервалы
+exports.getStartEndDate = async (req, res) => {
+    try {
+        const orders = await Order.findAll({
+            attributes: ['start_date', 'end_date']
+        });
+
+        res.status(200).json({ orders });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to retrieve start_date and end_date" });
+    }
+};
+
+
