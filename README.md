@@ -8,3 +8,7 @@ npm install
 ```
 npm run serve
 ```
+## Backend setup & start
+```
+npm i
+npm start
