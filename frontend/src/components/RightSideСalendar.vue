@@ -6,17 +6,31 @@
             </vue-cal>
         </div>
         <h3 style="margin-top: 10px;">Активные приглашения</h3>
-                <div v-for="item in getItems" :key="item.id" 
-                class="carousel-item"  style="margin-top: 10px; text-align: left; color: black;">
-                    <p style="margin-bottom: 10px; font-size: 17px;">{{ item.name }}</p>
-                    <p class="forp" style="display: inline-block;">{{ item.time }}</p>
-                    <p class="forp" style="display: inline-block;">{{ item.guarantor }}</p>
-                    <p class="forp" style="width: 115px; text-align: center; margin-top: 5px;">{{ item.jobTitle }}</p>
-                    <div style="margin-top: 15px;">
-                        <v-btn style="font-size: 11px; margin-right: 10px;">Подробнее</v-btn>
-                        <v-btn style="font-size: 11px;">Отклонить</v-btn>
-                    </div>
-                </div>
+        <div v-for="item in getItems" :key="item.id" class="carousel-item"
+            style="margin-top: 10px; text-align: left; color: black;">
+            <p style="margin-bottom: 10px; font-size: 17px;">{{ item.name }}</p>
+            <p class="forp" style="display: inline-block;">{{ item.time }}</p>
+            <p class="forp" style="display: inline-block;">{{ item.guarantor }}</p>
+            <p class="forp" style="width: 115px; text-align: center; margin-top: 5px;">{{ item.jobTitle }}</p>
+            <div style="margin-top: 15px;">
+                <v-btn @click="openInfo(item.unformation)" style="font-size: 11px; margin-right: 10px;">Подробнее</v-btn>
+                <v-btn @click="cancel" style="font-size: 11px;">Отклонить</v-btn>
+            </div>
+        </div>
+
+        <v-dialog v-model="dialogInformation" width="auto">
+            <div class="infoDial">
+                <h2 style="margin-bottom: 20px;">Информация</h2>
+                <p>
+                    {{ inform }}
+                </p>
+                <br>
+                <v-btn @click="dialogInformation = false">
+                    ок
+                </v-btn>
+            </div>
+        </v-dialog>
+
     </div>
 </template>
   
@@ -28,38 +42,60 @@ import { mapGetters } from "vuex";
 export default {
     computed: mapGetters(["getName", "getGuarantor", "getJobTitle", "getTime", "getItems"]),
     components: { VueCal },
-    name: 'RightSideСalendar'
+    name: 'RightSideСalendar',
+    data() {
+        return {
+            inform: "",
+            dialogInformation: false
+        }
+    },
+    methods: {
+        openInfo(info) {
+            this.inform = info;
+            this.dialogInformation = true;
+        },
+        cancel(){
+            alert("Приглашение отклонено!");
+        }
+    }
 }
 
 </script>
   
 <style scoped>
-.carousel-item {
+.infoDial {
   text-align: center;
-  padding: 20px;
   background-color: #ececec;
-  border-radius: 8px;
+  width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+}
+.carousel-item {
+    text-align: center;
+    padding: 20px;
+    background-color: #ececec;
+    border-radius: 8px;
 }
 
 .cal-item {
-  text-align: center;
-  background-color: #ececec;
-  border-radius: 10px;
+    text-align: center;
+    background-color: #ececec;
+    border-radius: 10px;
 }
 
 .forp {
-    margin-right: 7px; 
+    margin-right: 7px;
     border-radius: 10px;
-    background-color: #C0C0C0; 
+    background-color: #C0C0C0;
     padding: 9px;
 }
 
 .elem {
-  /* Стили для элемента карусели */
-  text-align: center;
-  padding: 20px;
-  background-color: black;
-  border-radius: 2px;
+    /* Стили для элемента карусели */
+    text-align: center;
+    padding: 20px;
+    background-color: black;
+    border-radius: 2px;
 }
 
 body {

@@ -2,11 +2,6 @@
   <v-container fluid>
 
     <v-app-bar :elevation="0" class="transparent">
-      <v-btn>
-        <router-link to="/" class="forb">
-          <img alt="Vue logo" src="../assets/logo.png" width="40">
-        </router-link>
-      </v-btn>
 
       <div style="margin-left: auto; margin-right: 15px;">
 
@@ -28,7 +23,7 @@
           </button>
         </router-link>
 
-        <router-link to="/profile" class="forb">
+        <router-link to="/" class="forb">
           <button class="myButton">
             Профиль
           </button>

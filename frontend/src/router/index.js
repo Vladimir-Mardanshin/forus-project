@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import MainPage from '../views/MainPage.vue'
+import profile from '../views/ProfilePage.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: MainPage
+    name: 'profile',
+    component: profile
   },
   {
     path: '/entrance',
@@ -31,11 +31,6 @@ const routes = [
     path: '/space',
     name: 'space',
     component: () => import('../views/SpacePage.vue')
-  },
-  {
-    path: '/profile',
-    name: 'profile',
-    component: () => import('../views/ProfilePage.vue')
   }
 ]
 

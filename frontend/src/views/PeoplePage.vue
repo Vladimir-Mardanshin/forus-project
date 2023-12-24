@@ -23,14 +23,28 @@
               Пригласить
             </v-btn>
 
-            <v-btn style="background-color: #ececec; font-size: 11px;">
+            <v-btn @click="openInfo(people.information)" style="background-color: #ececec; font-size: 11px;">
               Подробнее
             </v-btn>
 
           </div>
         </v-card>
+
       </v-col>
     </v-row>
+
+    <v-dialog v-model="dialogInformation" width="auto">
+      <div class="infoDial">
+        <h2 style="margin-bottom: 20px;">Информация</h2>
+        <p>
+          {{ inform }}
+        </p>
+        <br>
+        <v-btn @click="dialogInformation = false">
+          ок
+        </v-btn>
+      </div>
+    </v-dialog>
 
     <v-dialog v-model="dialog" width="auto">
       <div class="fdial">
@@ -43,15 +57,15 @@
         <h4 style="text-align: left; margin-top: 10px; margin-bottom: 10px;">
           Выберите время мероприятия
         </h4>
-        <v-btn :style="backcol1" @click="changeBaccol1" class="ftime">08:00 - 09:00</v-btn>
-        <v-btn :style="backcol2" @click="changeBaccol2" class="ftime">09:00 - 10:00</v-btn>
-        <v-btn :style="backcol3" @click="changeBaccol3" class="ftime">10:00 - 11:00</v-btn>
-        <v-btn :style="backcol4" @click="changeBaccol4" class="ftime">11:00 - 12:00</v-btn>
-        <v-btn :style="backcol5" @click="changeBaccol5" class="ftime">12:00 - 13:00</v-btn>
-        <v-btn :style="backcol6" @click="changeBaccol6" class="ftime">13:00 - 14:00</v-btn>
-        <v-btn :style="backcol7" @click="changeBaccol7" class="ftime">14:00 - 15:00</v-btn>
-        <v-btn :style="backcol8" @click="changeBaccol8" class="ftime">15:00 - 16:00</v-btn>
-        <v-btn :style="backcol9" @click="changeBaccol9" class="ftime">16:00 - 17:00</v-btn>
+        <v-btn :style="backcol[1]" @click="changeBaccol(1)" class="ftime">08:00 - 09:00</v-btn>
+        <v-btn :style="backcol[2]" @click="changeBaccol(2)" class="ftime">09:00 - 10:00</v-btn>
+        <v-btn :style="backcol[3]" @click="changeBaccol(3)" class="ftime">10:00 - 11:00</v-btn>
+        <v-btn :style="backcol[4]" @click="changeBaccol(4)" class="ftime">11:00 - 12:00</v-btn>
+        <v-btn :style="backcol[5]" @click="changeBaccol(5)" class="ftime">12:00 - 13:00</v-btn>
+        <v-btn :style="backcol[6]" @click="changeBaccol(6)" class="ftime">13:00 - 14:00</v-btn>
+        <v-btn :style="backcol[7]" @click="changeBaccol(7)" class="ftime">14:00 - 15:00</v-btn>
+        <v-btn :style="backcol[8]" @click="changeBaccol(8)" class="ftime">15:00 - 16:00</v-btn>
+        <v-btn :style="backcol[0]" @click="changeBaccol(0)" class="ftime">16:00 - 17:00</v-btn>
 
         <h4>Ответственные лица</h4>
         <div class="faces-container">
@@ -106,14 +120,20 @@ export default {
   data() {
     return {
       dialog: false,
+      dialogInformation: false,
       id: 0,
+      inform: "",
       faces: [],
-      backcol1: "", backcol2: "", backcol3: "", backcol4: "", backcol5: "",
-      backcol6: "", backcol7: "", backcol8: "", backcol9: "",
+      backcol: ["", "", "", "", "",
+        "", "", "", ""]
     }
   },
 
   methods: {
+    openInfo(info) {
+      this.inform = info;
+      this.dialogInformation = true;
+    },
     sendInvitation() {
       alert("Приглашение отправлено!");
       this.dialog = false;
@@ -140,83 +160,27 @@ export default {
       console.log(this.id);
     },
 
-    changeBaccol1() {
-      if (this.backcol1 == "") { 
-        this.backcol1 = "background-color: #C0C0C0;"; 
-      }
-      else { 
-        this.backcol1 = ""; 
-      }
-    },
-    changeBaccol2() {
-      if (this.backcol2 == "") {
-        this.backcol2 = "background-color: #C0C0C0;";
+    changeBaccol(id) {
+      if (this.backcol[id] == "") {
+        this.backcol[id] = "background-color: #C0C0C0;";
       }
       else {
-        this.backcol2 = "";
+        this.backcol[id] = "";
       }
-    },
-    changeBaccol3() {
-      if (this.backcol3 == "") {
-        this.backcol3 = "background-color: #C0C0C0;";
-      }
-      else {
-        this.backcol3 = "";
-      }
-    },
-    changeBaccol4() {
-      if (this.backcol4 == "") {
-        this.backcol4 = "background-color: #C0C0C0;";
-      }
-      else {
-        this.backcol4 = "";
-      }
-    },
-    changeBaccol5() {
-      if (this.backcol5 == "") {
-        this.backcol5 = "background-color: #C0C0C0;";
-      }
-      else {
-        this.backcol5 = "";
-      }
-    },
-    changeBaccol6() {
-      if (this.backcol6 == "") {
-        this.backcol6 = "background-color: #C0C0C0;";
-      }
-      else {
-        this.backcol6 = "";
-      }
-    },
-    changeBaccol7() {
-      if (this.backcol7 == "") {
-        this.backcol7 = "background-color: #C0C0C0;";
-      }
-      else {
-        this.backcol7 = "";
-      }
-    },
-    changeBaccol8() {
-      if (this.backcol8 == "") {
-        this.backcol8 = "background-color: #C0C0C0;";
-      }
-      else {
-        this.backcol8 = "";
-      }
-    },
-    changeBaccol9() {
-      if (this.backcol9 == "") {
-        this.backcol9 = "background-color: #C0C0C0;";
-      }
-      else {
-        this.backcol9 = "";
-      }
-    },
+    }
   }
 }
 </script>
    
 <style scoped>
+.infoDial {
+  text-align: center;
+  background-color: #ececec;
+  width: 400px;
+  padding: 20px;
+  border-radius: 10px;
+}
+
 .forbd {
   margin-top: 15px;
   display: flex;
@@ -237,10 +201,6 @@ export default {
   /* Устанавливаем flex контейнер */
 }
 
-#myButton:active {
-  /* Стили при клике на кнопку */
-  background-color: #45a049;
-}
 
 .ftime {
   width: 150px;
